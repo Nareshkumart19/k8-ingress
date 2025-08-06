@@ -64,7 +64,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     #alb.ingress.kubernetes.io/group.name: joindevops
 spec:
-  ingessClassName: app1
+  ingressClassName: app1
   rules:
   - host: "app1.daws84s.space"
     http:
