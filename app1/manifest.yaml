@@ -56,7 +56,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-wildcard-host
+  name: app1
   annotations:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:090074823871:certificate/97e32bb3-29f0-4442-8144-fa053475355c
@@ -64,6 +64,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     #alb.ingress.kubernetes.io/group.name: joindevops
 spec:
+  ingessClassName: app1
   rules:
   - host: "app1.daws84s.space"
     http:
