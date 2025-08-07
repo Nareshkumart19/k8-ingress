@@ -1,58 +1,50 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: app1 
-  labels: 
-    # replica set labels
+metadata:
+  name: app1
+  # deployment labels
+  labels:
     purpose: ingress
     project: roboshop
-    environment: dev
     app: app1
 spec:
   replicas: 2
-  # these are the labels replica set use to crete pod replicas, this should match pod labels 
+  # These are the labels replica set use to create pod replicas, this should match pod labels
   selector:
     matchLabels:
       purpose: ingress
       project: roboshop
-      environment: dev
       app: app1
-
-  # this pod defination    
+  # This is pod definition
   template:
     metadata:
       labels:
         purpose: ingress
         project: roboshop
-        environment: dev
-        app: app1       
+        app: app1
     spec:
       containers:
       - name: app1
-        #image: nginx:stable-perl
-        image: nareshkumart/app1:v1
-
+        image: joindevops/app1:v1
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app1  # service name
+  name: app1
   labels:
     purpose: ingress
+    project: roboshop
+    app: app1
 spec:
   selector:
     purpose: ingress
     project: roboshop
-    env: dev
     app: app1
-  ports: 
-  - name: http
-    protocol:  TCP
-    port: 80 # service port
-    targetPort: 80 # container port
-
+  ports:
+    - protocol: TCP
+      port: 80 # service port
+      targetPort: 80 # container port
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -62,11 +54,11 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:090074823871:certificate/e81b119c-47d8-403c-bc35-cbdcd9d06ce8
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    #alb.ingress.kubernetes.io/group.name: joindevops
+    alb.ingress.kubernetes.io/group.name: joindevops
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.daws84s.space"
+  - host: "app1.daws84s.site"
     http:
       paths:
       - pathType: Prefix
@@ -75,5 +67,4 @@ spec:
           service:
             name: app1
             port:
-              number: 80
-
+              number: 80 # app1 service port
