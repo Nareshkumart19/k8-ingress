@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: app1 
+  name: app2 
   labels: 
     # replica set labels
     purpose: ingess
     project: roboshop
     environment: dev
-    app: app1
+    app: app2
 spec:
-  replicas: 2
+  replicas: 1
   # these are the labels replica set use to crete pod replicas, this should match pod labels 
   selector:
     matchLabels:
       purpose: ingess
       project: roboshop
       environment: dev
-      app: app1
+      app: app2
 
   # this pod defination    
   template:
@@ -25,9 +25,9 @@ spec:
         purpose: ingess
         project: roboshop
         environment: dev
-        app: app1       
+        app: app2       
     spec:
       containers:
-      - name: app1
+      - name: app2
         #image: nginx:stable-perl
-        image: nareshkumart/app1:v1
+        image: nareshkumart/app2:v1
