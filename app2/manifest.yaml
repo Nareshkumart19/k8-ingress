@@ -6,7 +6,6 @@ metadata:
     # replica set labels
     purpose: ingess
     project: roboshop
-    environment: dev
     app: app2
 spec:
   replicas: 2
@@ -15,7 +14,6 @@ spec:
     matchLabels:
       purpose: ingess
       project: roboshop
-      environment: dev
       app: app2
 
   # this pod defination    
@@ -24,7 +22,6 @@ spec:
       labels:
         purpose: ingess
         project: roboshop
-        environment: dev
         app: app2       
     spec:
       containers:
@@ -40,13 +37,11 @@ metadata:
   labels:
     purpose: ingess
     project: roboshop
-    environment: dev
     app: app2
 spec:
   selector: 
     purpose: ingess
     project: roboshop
-    environment: dev
     app: app2
   ports:
     - protocol: TCP
@@ -75,6 +70,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: app1
+            name: app2
             port:
               number: 80 # app1 service port
