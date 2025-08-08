@@ -34,7 +34,7 @@ spec:
 
 --- 
 apiVersion: v1
-kind: Servicve
+kind: Service
 metadata: 
   name: app2
   labels:
